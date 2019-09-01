@@ -1,12 +1,20 @@
 {
     "include": [
-        "./src/*"
+        "./src/*",
+        "**/.ts",
+        "**/*.tsx"
     ],
     "compilerOptions": {
+        "rootDir": "./src",
+        "baseUrl": "./src",
+        "strict": false,
         "lib": [
             "dom",
-            "es2015"
+            "es2018",
+            "esnext.asynciterable",
+            "esnext.array"
         ],
-        "jsx": "react"
+        "jsx": "react",
+        "esModuleInterop": true
     }
 }
