@@ -1,16 +1,8 @@
-import * as React from "react";
+import React, { FC } from "react";
 import { render } from "react-dom";
+import App from "./components/App";
 
-import "./styles.css";
-
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
-  );
-}
+const Main: FC = () => <App />;
 
 const rootElement = document.getElementById("root");
-render(<App />, rootElement);
+render(<Main />, rootElement);

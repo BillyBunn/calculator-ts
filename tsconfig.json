@@ -1,13 +1,8 @@
 {
-    "include": [
-        "./src/*",
-        "**/.ts",
-        "**/*.tsx"
-    ],
     "compilerOptions": {
         "rootDir": "./src",
         "baseUrl": "./src",
-        "strict": false,
+        "strict": true,
         "lib": [
             "dom",
             "es2018",
@@ -15,6 +10,22 @@
             "esnext.array"
         ],
         "jsx": "react",
-        "esModuleInterop": true
-    }
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "strictBindCallApply": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": true
+    },
+    "include": [
+        "./src/*",
+        "**/.ts",
+        "**/*.tsx"
+    ],
+    "exclude": [
+        "node_modules",
+        "build"
+    ]
 }
