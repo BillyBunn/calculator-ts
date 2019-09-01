@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { State, Action, Context, ActionType } from "./App";
 
 const ButtonGrid = styled.div`
   display: grid;
@@ -11,50 +12,44 @@ const ButtonGrid = styled.div`
   }
 `;
 
-type ButtonProps = {
-  changeDisplay: (thing: React.ReactNode) => void;
-  children: React.ReactChild;
-};
-const Button = ({ changeDisplay, children }: ButtonProps) => (
-  <button onClick={() => changeDisplay(children)}>{children}</button>
-);
+const Buttons = () => {
+  const [, dispatch] = React.useContext<[State, React.Dispatch<Action>]>(
+    Context
+  );
 
-type ButtonsProps = {
-  changeDisplay: (thing: React.ReactNode) => void;
-};
-
-const Buttons = ({ changeDisplay }: ButtonsProps) => {
   return (
     <ButtonGrid>
-      <Button changeDisplay={changeDisplay}>M+</Button>
-      <Button changeDisplay={changeDisplay}>M&minus;</Button>
-      <Button changeDisplay={changeDisplay}>MR</Button>
-      <Button changeDisplay={changeDisplay}>MC</Button>
-      <Button changeDisplay={changeDisplay}>+/&minus;</Button>
+      <button>M+</button>
+      <button>M&minus;</button>
+      <button>MR</button>
+      <button>MC</button>
+      <button>+/&minus;</button>
 
-      <Button changeDisplay={changeDisplay}>&Delta;%</Button>
-      <Button changeDisplay={changeDisplay}>7</Button>
-      <Button changeDisplay={changeDisplay}>8</Button>
-      <Button changeDisplay={changeDisplay}>9</Button>
-      <Button changeDisplay={changeDisplay}>&divide;</Button>
+      <button>&Delta;%</button>
+      <button onClick={() => dispatch({ type: ActionType.CALCULATE })}>
+        7
+      </button>
+      <button>8</button>
+      <button>9</button>
+      <button>&divide;</button>
 
-      <Button changeDisplay={changeDisplay}>&radic;</Button>
-      <Button changeDisplay={changeDisplay}>4</Button>
-      <Button changeDisplay={changeDisplay}>5</Button>
-      <Button changeDisplay={changeDisplay}>6</Button>
-      <Button changeDisplay={changeDisplay}>&times;</Button>
+      <button>&radic;</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>&times;</button>
 
-      <Button changeDisplay={changeDisplay}>%</Button>
-      <Button changeDisplay={changeDisplay}>1</Button>
-      <Button changeDisplay={changeDisplay}>2</Button>
-      <Button changeDisplay={changeDisplay}>3</Button>
-      <Button changeDisplay={changeDisplay}>&minus;</Button>
+      <button>%</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>&minus;</button>
 
-      <Button changeDisplay={changeDisplay}>CE</Button>
-      <Button changeDisplay={changeDisplay}>0</Button>
-      <Button changeDisplay={changeDisplay}>.</Button>
-      <Button changeDisplay={changeDisplay}>=</Button>
-      <Button changeDisplay={changeDisplay}>+</Button>
+      <button>CE</button>
+      <button>0</button>
+      <button>.</button>
+      <button>=</button>
+      <button>+</button>
     </ButtonGrid>
   );
 };
