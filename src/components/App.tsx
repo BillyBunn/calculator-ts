@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import Display from "./Display";
 import Buttons from "./Buttons";
 
-const App: FC = () => {
-  const [display, setDisplay] = useState("numbers");
+const App = () => {
+  const [display, setDisplay] = useState("0");
   const changeDisplay = (thing: string) => {
     setDisplay(thing);
   };

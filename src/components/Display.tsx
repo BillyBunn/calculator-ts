@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const StyledDisplay = styled.div`
   background: lightgrey;
 `;
-const Display: FC = ({ children }) => {
+const Display = ({ children }) => {
   return <StyledDisplay>{children}</StyledDisplay>;
 };
 

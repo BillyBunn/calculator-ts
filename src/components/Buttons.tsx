@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const ButtonGrid = styled.div`
@@ -11,20 +11,19 @@ const ButtonGrid = styled.div`
   }
 `;
 
-interface ButtonProps {
+type ButtonProps = {
   changeDisplay: (thing: React.ReactNode) => void;
-}
-const Button: FC<ButtonProps> = props => (
-  <button onClick={() => props.changeDisplay(props.children)} {...props}>
-    {props.children}
-  </button>
+  children: React.ReactChild;
+};
+const Button = ({ changeDisplay, children }: ButtonProps) => (
+  <button onClick={() => changeDisplay(children)}>{children}</button>
 );
 
-interface ButtonsProps {
-  changeDisplay: () => void;
-}
+type ButtonsProps = {
+  changeDisplay: (thing: React.ReactNode) => void;
+};
 
-const Buttons: FC<ButtonsProps> = ({ changeDisplay }) => {
+const Buttons = ({ changeDisplay }: ButtonsProps) => {
   return (
     <ButtonGrid>
       <Button changeDisplay={changeDisplay}>M+</Button>
