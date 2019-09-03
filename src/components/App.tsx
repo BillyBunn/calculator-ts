@@ -31,7 +31,8 @@ const Calculator = styled.main``;
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: grey
+    background-color: #F8F8F8;
+    font-family: sans-serif
   }`;
 
 const App = () => {

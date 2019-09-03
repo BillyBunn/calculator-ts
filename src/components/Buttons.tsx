@@ -14,13 +14,12 @@ const ButtonGrid = styled.div`
 `;
 
 type ButtonProps = {
-  action?: () => void;
   children: React.ReactChild;
   type: keyof typeof ActionType;
   value?: string;
 };
 
-const Button = ({ children, type, value }: ButtonProps) => {
+const Button = ({ type, value, children }: ButtonProps) => {
   const [, dispatch] = React.useContext<[State, React.Dispatch<Action>]>(
     Context
   );
