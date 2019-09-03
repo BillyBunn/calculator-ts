@@ -9,7 +9,9 @@ export type State = {
 export enum ActionType {
   CLEAR = "CLEAR",
   CALCULATE = "CALCULATE",
-  NUMBER = "NUMBER"
+  NUMBER = "NUMBER",
+  OPERATOR = "OPERATOR",
+  SIGN = "SIGN"
 }
 
 export type Action = {
@@ -31,6 +33,8 @@ function reducer(state: State, action: Action): State {
       return { display: "calculatin'" };
     case ActionType.NUMBER:
       return { display: state.display + payload };
+    case ActionType.SIGN:
+      return { display: payload + state.display };
     default:
       return state;
   }
