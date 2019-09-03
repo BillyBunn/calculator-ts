@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { State, Action, Context } from "./App";
+import { State, Action } from "../types";
+import { Context } from "./App";
 
 const StyledDisplay = styled.div`
   background: lightgrey;

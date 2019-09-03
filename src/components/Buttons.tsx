@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { State, Action, Context, ActionType } from "./App";
+import { State, Action, ActionType } from "../types";
+import { Context } from "./App";
 
 const ButtonGrid = styled.div`
   display: grid;
