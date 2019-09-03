@@ -34,7 +34,7 @@ const Button = ({ type, value, children }: ButtonProps) => {
 
 const Buttons = () => {
   return (
-    <ButtonGrid>
+    <ButtonGrid className="buttons">
       <Button type="MEMORY">M+</Button>
       <Button type="MEMORY">M&minus;</Button>
       <Button type="MEMORY">MR</Button>

@@ -1,5 +1,6 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import { myTheme } from "../theme";
 import Display from "./Display";
 import Buttons from "./Buttons";
 
@@ -25,26 +26,32 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
   return <Context.Provider value={value}>{props.children}</Context.Provider>;
 }
 
-const Calculator = styled.main``;
-
-// background-color: ${props => props.theme.colors.secondary};
-
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: #F8F8F8;
-    font-family: sans-serif
-  }`;
+    color: ${props => props.theme.colors.secondary};
+    background: ${props => props.theme.colors.background};
+  }
+`;
+
+const Calculator = styled.main`
+  background: ${props => props.theme.colors.calculator};
+  .display {
+    background: ${props => props.theme.colors.display};
+  }
+`;
 
 const App = () => {
   return (
-    <ContextProvider>
-      <GlobalStyle />
-      <header>TypeScript Calculator</header>
-      <Calculator>
-        <Display />
-        <Buttons />
-      </Calculator>
-    </ContextProvider>
+    <ThemeProvider theme={myTheme}>
+      <ContextProvider>
+        <GlobalStyle />
+        <header>TypeScript Calculator</header>
+        <Calculator>
+          <Display />
+          <Buttons />
+        </Calculator>
+      </ContextProvider>
+    </ThemeProvider>
   );
 };
 
