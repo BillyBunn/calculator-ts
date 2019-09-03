@@ -8,11 +8,13 @@ export type State = {
 
 export enum ActionType {
   CLEAR = "CLEAR",
-  CALCULATE = "CALCULATE"
+  CALCULATE = "CALCULATE",
+  NUMBER = "NUMBER"
 }
 
 export type Action = {
   type: ActionType | null;
+  payload?: string | number;
 };
 
 export const Context = React.createContext<[State, React.Dispatch<Action>]>([
@@ -21,11 +23,14 @@ export const Context = React.createContext<[State, React.Dispatch<Action>]>([
 ]);
 
 function reducer(state: State, action: Action): State {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case ActionType.CLEAR:
-      return { display: "" };
+      return { display: "0" };
     case ActionType.CALCULATE:
       return { display: "calculatin'" };
+    case ActionType.NUMBER:
+      return { display: state.display + payload };
     default:
       return state;
   }

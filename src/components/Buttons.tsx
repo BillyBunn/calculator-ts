@@ -12,6 +12,14 @@ const ButtonGrid = styled.div`
   }
 `;
 
+type ButtonProps = {
+  action?: () => void;
+  children: React.ReactChild;
+};
+const Button = ({ action, children }: ButtonProps) => (
+  <button onClick={action}>{children}</button>
+);
+
 const Buttons = () => {
   const [, dispatch] = React.useContext<[State, React.Dispatch<Action>]>(
     Context
@@ -19,37 +27,37 @@ const Buttons = () => {
 
   return (
     <ButtonGrid>
-      <button>M+</button>
-      <button>M&minus;</button>
-      <button>MR</button>
-      <button>MC</button>
-      <button>+/&minus;</button>
+      <Button>M+</Button>
+      <Button>M&minus;</Button>
+      <Button>MR</Button>
+      <Button>MC</Button>
+      <Button>+/&minus;</Button>
 
-      <button>&Delta;%</button>
-      <button onClick={() => dispatch({ type: ActionType.CALCULATE })}>
+      <Button>&Delta;%</Button>
+      <Button action={() => dispatch({ type: ActionType.NUMBER, payload: 7 })}>
         7
-      </button>
-      <button>8</button>
-      <button>9</button>
-      <button>&divide;</button>
+      </Button>
+      <Button>8</Button>
+      <Button>9</Button>
+      <Button>&divide;</Button>
 
-      <button>&radic;</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>&times;</button>
+      <Button>&radic;</Button>
+      <Button>4</Button>
+      <Button>5</Button>
+      <Button>6</Button>
+      <Button>&times;</Button>
 
-      <button>%</button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>&minus;</button>
+      <Button>%</Button>
+      <Button>1</Button>
+      <Button>2</Button>
+      <Button>3</Button>
+      <Button>&minus;</Button>
 
-      <button>CE</button>
-      <button>0</button>
-      <button>.</button>
-      <button>=</button>
-      <button>+</button>
+      <Button action={() => dispatch({ type: ActionType.CLEAR })}>CE</Button>
+      <Button>0</Button>
+      <Button>.</Button>
+      <Button>=</Button>
+      <Button>+</Button>
     </ButtonGrid>
   );
 };
