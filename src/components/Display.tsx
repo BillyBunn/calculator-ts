@@ -9,10 +9,13 @@ const Display = () => {
   const [state] = React.useContext<[State, React.Dispatch<Action>]>(Context);
   return (
     <StyledDisplay>
-      display: {state.display} <br />
-      currentVal:{state.currentValue} <br />
-      operator: {state.operator} <br />
-      operand: {state.operand} <br />
+      {state.display}
+      {/* <ul>
+        <li>display: {`${state.display}`}</li>
+        <li>operator: {`${state.operator}`}</li>
+        <li>firstOperand: {`${state.firstOperand}`}</li>
+        <li>waitingForSecondOperand: {`${state.waitingForSecondOperand}`}</li>
+      </ul> */}
     </StyledDisplay>
   );
 };

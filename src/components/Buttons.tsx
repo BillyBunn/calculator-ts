@@ -25,7 +25,6 @@ const Button = ({ children, type, value }: ButtonProps) => {
   );
   const actionType = type || "NUMBER";
   const actionPayload = (value && value.toString()) || children.toString();
-  // console.log(children, actionType, actionPayload);
 
   const handleClick = () =>
     dispatch({ type: ActionType[actionType], payload: actionPayload });
@@ -36,25 +35,21 @@ const Button = ({ children, type, value }: ButtonProps) => {
 const Buttons = () => {
   return (
     <ButtonGrid>
-      <Button>M+</Button>
-      <Button>M&minus;</Button>
-      <Button>MR</Button>
-      <Button>MC</Button>
+      <Button type="MEMORY">M+</Button>
+      <Button type="MEMORY">M&minus;</Button>
+      <Button type="MEMORY">MR</Button>
+      <Button type="MEMORY">MC</Button>
       <Button type="SIGN">+/&minus;</Button>
 
       <Button>&Delta;%</Button>
-      <Button type="NUMBER" value="7">
-        7
-      </Button>
-      <Button type="NUMBER" value="8">
-        8
-      </Button>
+      <Button value="7">7</Button>
+      <Button value="8">8</Button>
       <Button>9</Button>
       <Button type="OPERATOR" value="/">
         &divide;
       </Button>
 
-      <Button>&radic;</Button>
+      <Button type="SQUARE_ROOT">&radic;</Button>
       <Button>4</Button>
       <Button>5</Button>
       <Button>6</Button>
@@ -62,7 +57,7 @@ const Buttons = () => {
         &times;
       </Button>
 
-      <Button>%</Button>
+      <Button type="PERCENTAGE">%</Button>
       <Button>1</Button>
       <Button>2</Button>
       <Button>3</Button>
@@ -72,8 +67,10 @@ const Buttons = () => {
 
       <Button type="CLEAR">CE</Button>
       <Button>0</Button>
-      <Button>.</Button>
-      <Button type="CALCULATE">=</Button>
+      <Button type="DECIMAL">.</Button>
+      <Button type="OPERATOR" value="+">
+        =
+      </Button>
       <Button type="OPERATOR" value="+">
         +
       </Button>

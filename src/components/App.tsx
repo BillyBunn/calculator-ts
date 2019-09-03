@@ -4,22 +4,25 @@ import Buttons from "./Buttons";
 
 export type State = {
   display: string;
-  currentValue: string;
-  operator: string;
-  operand: string;
+  operator: string | null;
+  firstOperand: number | null;
+  waitingForSecondOperand: boolean;
 };
 
 export enum ActionType {
   CLEAR = "CLEAR",
-  CALCULATE = "CALCULATE",
   NUMBER = "NUMBER",
+  DECIMAL = "DECIMAL",
   OPERATOR = "OPERATOR",
-  SIGN = "SIGN"
+  SIGN = "SIGN",
+  SQUARE_ROOT = "SQUARE_ROOT",
+  PERCENTAGE = "PERCENTAGE",
+  MEMORY = "MEMORY"
 }
 
 export type Action = {
   type: ActionType | null;
-  payload?: string | number | undefined;
+  payload?: string;
 };
 
 export const Context = React.createContext<[State, React.Dispatch<Action>]>([
@@ -30,117 +33,107 @@ export const Context = React.createContext<[State, React.Dispatch<Action>]>([
 function reducer(state: State, action: Action): State {
   const { type, payload } = action;
   switch (type) {
-    case ActionType.CLEAR:
-      return { ...state, display: "0", currentValue: "", operator: "" };
-
-    case ActionType.CALCULATE: {
-      const currentValue = calculate(state.currentValue);
+    case ActionType.CLEAR: {
       return {
         ...state,
-        display: currentValue,
-        currentValue,
-        operator: "",
-        operand: ""
+        display: "0",
+        firstOperand: null,
+        waitingForSecondOperand: false,
+        operator: null
       };
     }
 
     case ActionType.NUMBER: {
       const number = payload;
-      let currentValue, display, arg2;
+      let { display, waitingForSecondOperand } = state;
 
-      // if an operator HAS been pressed,
-      if (state.operator) {
-        // 1. append the number to the current value string
-        currentValue = state.currentValue + number;
-        // 2. add to arg2 and display it
-        arg2 = state.operand + number;
-        display = arg2;
+      if (state.waitingForSecondOperand) {
+        display = number;
+        waitingForSecondOperand = false;
       } else {
-        // if an operator has not been pressed, just append the digit
-        currentValue = state.currentValue + number;
-        display = state.currentValue + number;
-        arg2 = state.operand;
+        display = display === "0" ? number : display + number;
       }
-
       return {
         ...state,
         display,
-        currentValue,
-        operand: arg2
+        waitingForSecondOperand
       };
     }
-    case ActionType.SIGN: {
-      // it's zero - do nothing
-      if (!state.currentValue || parseFloat(state.currentValue) === 0)
-        return state;
 
-      let display, currentValue;
-      // it's positive - make negative
-      if (parseFloat(state.currentValue) > 0) {
-        display = "-" + state.display;
-        currentValue = "-" + state.currentValue;
+    case ActionType.DECIMAL: {
+      let { display, waitingForSecondOperand } = state;
+      if (waitingForSecondOperand) return state;
+
+      if (!display.includes(".")) {
+        display += ".";
       }
-      // it's negative - make positive
-      if (parseFloat(state.currentValue) < 0) {
-        display = state.display.substring(1);
-        currentValue = state.currentValue.substring(1);
-      }
-      return { ...state, display, currentValue };
+      return { ...state, display };
     }
+
     case ActionType.OPERATOR: {
-      const operator = payload;
-      let { currentValue, display, operand: arg2 } = state;
-      if (state.operator) {
-        if (state.operand) {
-          currentValue = calculate(state.currentValue);
-          display = calculate(state.currentValue);
-          arg2 = "";
-        } else {
-          currentValue = state.currentValue.slice(0, -1);
-        }
-      }
-      // if there's a currentOperator in state already AND no arg2,
-      // (that means there's one in the currentValue)
-      // remove and replace the operator on the currentvalue
-      if (state.operator && !state.operand) {
-        currentValue = state.currentValue.slice(0, -1);
-      } else if (state.operator && state.operand) {
-        // if there's a currentOperator AND an arg2
-        // 1. calculate, display, & change currentValue
-        currentValue = calculate(state.currentValue);
-        display = calculate(state.currentValue);
-        arg2 = "";
-      }
-      // else {
-      //   // otherwise, just add to the current value
-      //   currentValue = state.currentValue;
-      // }
+      const nextOperator = payload;
+      let { firstOperand, display, operator } = state;
+      const inputValue = parseFloat(display);
 
-      currentValue += operator;
+      if (operator && state.waitingForSecondOperand) {
+        return { ...state, operator: nextOperator };
+      }
 
-      // either way, change the currentOperator in state
+      if (firstOperand === null) {
+        firstOperand = inputValue;
+      } else if (operator) {
+        display = performCalculation[operator](firstOperand, inputValue);
+        firstOperand = parseFloat(display);
+      }
+
       return {
         ...state,
-        operator,
-        currentValue,
         display,
-        operand: arg2
+        firstOperand,
+        waitingForSecondOperand: true,
+        operator: nextOperator
       };
     }
+
+    case ActionType.MEMORY:
+      return state;
+    case ActionType.SQUARE_ROOT:
+      return state;
+    case ActionType.PERCENTAGE:
+      return state;
+
+    // case ActionType.SIGN: {
+    //   let { display, firstOperand: operand } = state;
+    //   display = (parseFloat(display) * -1).toString();
+    //   operand = (parseFloat(operand) * -1).toString();
+    //   return { ...state, display, firstOperand: operand };
+    // }
     default:
       return state;
   }
 }
-const calculate = (entry: string) => {
-  return eval(entry);
+const performCalculation = {
+  "/": (firstOperand: number, secondOperand: number): string =>
+    (firstOperand / secondOperand).toString(),
+
+  "*": (firstOperand: number, secondOperand: number): string =>
+    (firstOperand * secondOperand).toString(),
+
+  "+": (firstOperand: number, secondOperand: number): string =>
+    (firstOperand + secondOperand).toString(),
+
+  "-": (firstOperand: number, secondOperand: number): string =>
+    (firstOperand - secondOperand).toString(),
+
+  "=": (firstOperand: number, secondOperand: number): string =>
+    secondOperand.toString()
 };
 
 const INITIAL_STATE: State = {
   display: "0",
-  currentValue: "",
-  operator: "",
-  arg1: "",
-  operand: ""
+  firstOperand: null,
+  waitingForSecondOperand: false,
+  operator: null
 };
 
 function ToggleProvider(props: React.PropsWithChildren<{}>) {
