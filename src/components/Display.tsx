@@ -7,7 +7,14 @@ const StyledDisplay = styled.div`
 `;
 const Display = () => {
   const [state] = React.useContext<[State, React.Dispatch<Action>]>(Context);
-  return <StyledDisplay>{state.display}</StyledDisplay>;
+  return (
+    <StyledDisplay>
+      display: {state.display} <br />
+      currentVal:{state.currentValue} <br />
+      operator: {state.currentOperator} <br />
+      arg2: {state.arg2} <br />
+    </StyledDisplay>
+  );
 };
 
 export default Display;
