@@ -101,13 +101,8 @@ function reducer(state: State, action: Action): State {
       return state;
     case ActionType.PERCENTAGE:
       return state;
-
-    // case ActionType.SIGN: {
-    //   let { display, firstOperand: operand } = state;
-    //   display = (parseFloat(display) * -1).toString();
-    //   operand = (parseFloat(operand) * -1).toString();
-    //   return { ...state, display, firstOperand: operand };
-    // }
+    case ActionType.SIGN:
+      return state;
     default:
       return state;
   }

@@ -15,7 +15,7 @@ const ButtonGrid = styled.div`
 type ButtonProps = {
   action?: () => void;
   children: React.ReactChild;
-  type?: keyof typeof ActionType;
+  type: keyof typeof ActionType;
   value?: string;
 };
 
@@ -41,32 +41,36 @@ const Buttons = () => {
       <Button type="MEMORY">MC</Button>
       <Button type="SIGN">+/&minus;</Button>
 
-      <Button>&Delta;%</Button>
-      <Button value="7">7</Button>
-      <Button value="8">8</Button>
-      <Button>9</Button>
+      <Button type="PERCENTAGE">&Delta;%</Button>
+      <Button type="NUMBER" value="7">
+        7
+      </Button>
+      <Button type="NUMBER" value="8">
+        8
+      </Button>
+      <Button type="NUMBER">9</Button>
       <Button type="OPERATOR" value="/">
         &divide;
       </Button>
 
       <Button type="SQUARE_ROOT">&radic;</Button>
-      <Button>4</Button>
-      <Button>5</Button>
-      <Button>6</Button>
+      <Button type="NUMBER">4</Button>
+      <Button type="NUMBER">5</Button>
+      <Button type="NUMBER">6</Button>
       <Button type="OPERATOR" value="*">
         &times;
       </Button>
 
       <Button type="PERCENTAGE">%</Button>
-      <Button>1</Button>
-      <Button>2</Button>
-      <Button>3</Button>
+      <Button type="NUMBER">1</Button>
+      <Button type="NUMBER">2</Button>
+      <Button type="NUMBER">3</Button>
       <Button type="OPERATOR" value="-">
         &minus;
       </Button>
 
       <Button type="CLEAR">CE</Button>
-      <Button>0</Button>
+      <Button type="NUMBER">0</Button>
       <Button type="DECIMAL">.</Button>
       <Button type="OPERATOR" value="+">
         =
