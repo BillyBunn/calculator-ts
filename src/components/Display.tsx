@@ -11,8 +11,8 @@ const Display = () => {
     <StyledDisplay>
       display: {state.display} <br />
       currentVal:{state.currentValue} <br />
-      operator: {state.currentOperator} <br />
-      arg2: {state.arg2} <br />
+      operator: {state.operator} <br />
+      operand: {state.operand} <br />
     </StyledDisplay>
   );
 };

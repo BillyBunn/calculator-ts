@@ -5,9 +5,8 @@ import Buttons from "./Buttons";
 export type State = {
   display: string;
   currentValue: string;
-  currentOperator: string;
-  arg1: string;
-  arg2: string;
+  operator: string;
+  operand: string;
 };
 
 export enum ActionType {
@@ -32,7 +31,7 @@ function reducer(state: State, action: Action): State {
   const { type, payload } = action;
   switch (type) {
     case ActionType.CLEAR:
-      return { ...state, display: "0", currentValue: "", currentOperator: "" };
+      return { ...state, display: "0", currentValue: "", operator: "" };
 
     case ActionType.CALCULATE: {
       const currentValue = calculate(state.currentValue);
@@ -40,8 +39,8 @@ function reducer(state: State, action: Action): State {
         ...state,
         display: currentValue,
         currentValue,
-        currentOperator: "",
-        arg2: ""
+        operator: "",
+        operand: ""
       };
     }
 
@@ -50,24 +49,24 @@ function reducer(state: State, action: Action): State {
       let currentValue, display, arg2;
 
       // if an operator HAS been pressed,
-      if (state.currentOperator) {
+      if (state.operator) {
         // 1. append the number to the current value string
         currentValue = state.currentValue + number;
         // 2. add to arg2 and display it
-        arg2 = state.arg2 + number;
+        arg2 = state.operand + number;
         display = arg2;
       } else {
         // if an operator has not been pressed, just append the digit
         currentValue = state.currentValue + number;
         display = state.currentValue + number;
-        arg2 = state.arg2;
+        arg2 = state.operand;
       }
 
       return {
         ...state,
         display,
         currentValue,
-        arg2
+        operand: arg2
       };
     }
     case ActionType.SIGN: {
@@ -90,19 +89,43 @@ function reducer(state: State, action: Action): State {
     }
     case ActionType.OPERATOR: {
       const operator = payload;
-      let currentValue;
-      // if there's a currentOperator in state already,
+      let { currentValue, display, operand: arg2 } = state;
+      if (state.operator) {
+        if (state.operand) {
+          currentValue = calculate(state.currentValue);
+          display = calculate(state.currentValue);
+          arg2 = "";
+        } else {
+          currentValue = state.currentValue.slice(0, -1);
+        }
+      }
+      // if there's a currentOperator in state already AND no arg2,
       // (that means there's one in the currentValue)
       // remove and replace the operator on the currentvalue
-      if (state.currentOperator) {
-        currentValue = state.currentValue.slice(0, -1) + operator;
-      } else {
-        // otherwise, just add to the current value
-        currentValue = state.currentValue + operator;
+      if (state.operator && !state.operand) {
+        currentValue = state.currentValue.slice(0, -1);
+      } else if (state.operator && state.operand) {
+        // if there's a currentOperator AND an arg2
+        // 1. calculate, display, & change currentValue
+        currentValue = calculate(state.currentValue);
+        display = calculate(state.currentValue);
+        arg2 = "";
       }
+      // else {
+      //   // otherwise, just add to the current value
+      //   currentValue = state.currentValue;
+      // }
+
+      currentValue += operator;
 
       // either way, change the currentOperator in state
-      return { ...state, currentOperator: operator, currentValue };
+      return {
+        ...state,
+        operator,
+        currentValue,
+        display,
+        operand: arg2
+      };
     }
     default:
       return state;
@@ -115,9 +138,9 @@ const calculate = (entry: string) => {
 const INITIAL_STATE: State = {
   display: "0",
   currentValue: "",
-  currentOperator: "",
+  operator: "",
   arg1: "",
-  arg2: ""
+  operand: ""
 };
 
 function ToggleProvider(props: React.PropsWithChildren<{}>) {
