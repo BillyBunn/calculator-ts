@@ -7,8 +7,14 @@ const myTheme: DefaultTheme = {
     main: "#F8F8F8",
     secondary: "#000",
     background: "#F8F8F8",
-    calculator: "#272727",
-    display: "#959783"
+    calculator: "#2D2D2D",
+    display: "#7F8980",
+    displayBorder: "#738A87",
+
+    memory: "#21392D",
+    operators: "#5E473A",
+    numbers: "#09090A",
+    calculate: "#FFCF79"
   }
 };
 

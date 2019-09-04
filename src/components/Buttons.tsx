@@ -22,22 +22,28 @@ const ButtonGrid = styled.div`
 
 const StyledButton = styled.button`
   background: ${props => {
-    // console.log(props);
-    switch (props.type) {
-      case "NUMBER":
-        return "#040404";
-      case "OPERATOR":
-        return "#69432D";
+    switch (props.color) {
       case "MEMORY":
-        return "#27392E";
+        return props.theme.colors.memory;
+      case "NUMBER":
+        return props.theme.colors.numbers;
+      case "OPERATOR":
+      case "PERCENTAGE":
+      case "SQUARE_ROOT":
+      case "DECIMAL":
+      case "CLEAR":
+        return props.theme.colors.operators;
+      case "CALCULATE":
+        return props.theme.colors.calculate;
       default:
-        return "red";
+        return props.theme.colors.numbers;
     }
   }};
   border: none;
   border-radius: 50%;
-  color: #fff;
+  color: ${props => (props.color === "CALCULATE" ? "#000" : "#fff")};
   display: flex;
+  font-size: 22px;
   height: 50px;
   margin: 10px;
   outline: none;
@@ -60,8 +66,10 @@ const Button = ({ type, value, children }: ButtonProps) => {
   const handleClick = () =>
     dispatch({ type: ActionType[actionType], payload: actionPayload });
 
+  const color = children === "=" ? "CALCULATE" : type;
+  // console.log(children);
   return (
-    <StyledButton onClick={handleClick} type={type}>
+    <StyledButton onClick={handleClick} color={color}>
       {children}
     </StyledButton>
   );
@@ -107,7 +115,7 @@ const Buttons = () => {
       <Button type="CLEAR">CE</Button>
       <Button type="NUMBER">0</Button>
       <Button type="DECIMAL">.</Button>
-      <Button type="OPERATOR" value="+">
+      <Button type="OPERATOR" value="=">
         =
       </Button>
       <Button type="OPERATOR" value="+">
