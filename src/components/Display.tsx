@@ -4,7 +4,14 @@ import { State, Action } from "../types";
 import { Context } from "./App";
 
 const StyledDisplay = styled.div`
-  background: lightgrey;
+  align-items: center;
+  background: ${props => props.theme.colors.display};
+  display: flex;
+  flex: 1;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 30px;
 `;
 const Display = () => {
   const [state] = React.useContext<[State, React.Dispatch<Action>]>(Context);

@@ -4,19 +4,25 @@ import { State, Action, ActionType } from "../types";
 import { Context } from "./App";
 
 const ButtonGrid = styled.div`
-  border: 1px solid black;
+  /* align-content: space-evenly; */
+  /* border: 1px solid black; */
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  padding: 30px;
+  /* justify-items: center; */
+
   > * {
-    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+  }
+  button:nth-child(-n + 5) {
+    background-color: #27392e;
   }
 `;
 
 const StyledButton = styled.button`
   background: ${props => {
-    console.log(props);
+    // console.log(props);
     switch (props.type) {
       case "NUMBER":
         return "#040404";
@@ -28,9 +34,13 @@ const StyledButton = styled.button`
         return "red";
     }
   }};
+  border: none;
   border-radius: 50%;
   color: #fff;
+  display: flex;
   height: 50px;
+  margin: 10px;
+  outline: none;
   width: 50px;
 `;
 

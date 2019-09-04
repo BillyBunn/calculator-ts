@@ -27,21 +27,44 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
 }
 
 const GlobalStyle = createGlobalStyle`
+  html, body {
+    background: ${props => props.theme.colors.background};
+    height: 100%;
+    margin: 0px;
+    margin:0px;
+    padding: 0px;
+  }
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
   body {
     color: ${props => props.theme.colors.secondary};
-    background: ${props => props.theme.colors.background};
+    font-family: sans-serif;
   }
 `;
 
 const Calculator = styled.main`
+  align-items: center;
   background: ${props => props.theme.colors.calculator};
+  border-radius: 10px 10px 50px 50px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 4rem auto 0 auto;
+  padding: 50px;
+  width: 450px;
 
   > header {
     color: ${props => props.theme.colors.main};
+    margin-bottom: 10px;
   }
 
   .display {
-    background: ${props => props.theme.colors.display};
+    height: 50px;
+    margin-bottom: 50px;
+    width: 100%;
   }
 
   .buttons {
