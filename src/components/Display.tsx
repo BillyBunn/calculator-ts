@@ -9,7 +9,7 @@ const StyledDisplay = styled.div`
 const Display = () => {
   const [state] = React.useContext<[State, React.Dispatch<Action>]>(Context);
   return (
-    <StyledDisplay>
+    <StyledDisplay className="display">
       {state.display}
       {/* <ul>
         <li>display: {`${state.display}`}</li>

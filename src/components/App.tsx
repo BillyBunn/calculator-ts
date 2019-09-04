@@ -35,8 +35,17 @@ const GlobalStyle = createGlobalStyle`
 
 const Calculator = styled.main`
   background: ${props => props.theme.colors.calculator};
+
+  > header {
+    color: ${props => props.theme.colors.main};
+  }
+
   .display {
     background: ${props => props.theme.colors.display};
+  }
+
+  .buttons {
+    background: ${props => props.theme.colors.calculator};
   }
 `;
 
@@ -45,8 +54,8 @@ const App = () => {
     <ThemeProvider theme={myTheme}>
       <ContextProvider>
         <GlobalStyle />
-        <header>TypeScript Calculator</header>
         <Calculator>
+          <header>TypeScript Calculator</header>
           <Display />
           <Buttons />
         </Calculator>

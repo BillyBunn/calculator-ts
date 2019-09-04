@@ -4,13 +4,34 @@ import { State, Action, ActionType } from "../types";
 import { Context } from "./App";
 
 const ButtonGrid = styled.div`
+  border: 1px solid black;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  border: 1px solid black;
+  padding: 30px;
   > * {
     border: 1px solid black;
   }
+`;
+
+const StyledButton = styled.button`
+  background: ${props => {
+    console.log(props);
+    switch (props.type) {
+      case "NUMBER":
+        return "#040404";
+      case "OPERATOR":
+        return "#69432D";
+      case "MEMORY":
+        return "#27392E";
+      default:
+        return "red";
+    }
+  }};
+  border-radius: 50%;
+  color: #fff;
+  height: 50px;
+  width: 50px;
 `;
 
 type ButtonProps = {
@@ -29,7 +50,11 @@ const Button = ({ type, value, children }: ButtonProps) => {
   const handleClick = () =>
     dispatch({ type: ActionType[actionType], payload: actionPayload });
 
-  return <button onClick={handleClick}>{children}</button>;
+  return (
+    <StyledButton onClick={handleClick} type={type}>
+      {children}
+    </StyledButton>
+  );
 };
 
 const Buttons = () => {
