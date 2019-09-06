@@ -8,7 +8,7 @@ const myTheme: DefaultTheme = {
     secondary: "#000",
     background: "#F8F8F8",
     calculator: "#2D2D2D",
-    display: "#7F8980",
+    display: "#AAABA2",
     displayBorder: "#738A87",
 
     memory: "#21392D",

@@ -48,6 +48,23 @@ const StyledButton = styled.button`
   margin: 10px;
   outline: none;
   width: 50px;
+  &:after {
+    /* content: '';
+    position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0; */
+  }
+
+  /* background: rgb(2, 0, 36);
+  background: linear-gradient(
+    135deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  ); */
 `;
 
 type ButtonProps = {

@@ -57,12 +57,14 @@ const Calculator = styled.main`
   width: 450px;
 
   > header {
+    align-self: flex-start;
     color: ${props => props.theme.colors.main};
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
   }
 
   .display {
-    height: 50px;
     margin-bottom: 50px;
     width: 100%;
   }
