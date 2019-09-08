@@ -79,11 +79,22 @@ export default function reducer(state: State, action: Action): State {
       return { ...state, display };
     }
 
+    case ActionType.PERCENTAGE: {
+      let { display } = state;
+      display = (parseFloat(display) / 100).toString();
+      return { ...state, display };
+    }
+
+    case ActionType.SIGN: {
+      let { display, firstOperand, waitingForSecondOperand } = state;
+      display = (parseFloat(display) * -1).toString();
+      if (waitingForSecondOperand) {
+        firstOperand = parseFloat(display);
+      }
+      return { ...state, display, firstOperand };
+    }
+
     case ActionType.MEMORY:
-      return state;
-    case ActionType.PERCENTAGE:
-      return state;
-    case ActionType.SIGN:
       return state;
     default:
       return state;
