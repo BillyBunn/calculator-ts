@@ -18,5 +18,5 @@ export enum ActionType {
 
 export type Action = {
   type: ActionType | null;
-  payload?: string;
+  payload: string;
 };

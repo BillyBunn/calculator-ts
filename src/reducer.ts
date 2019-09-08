@@ -72,9 +72,10 @@ export default function reducer(state: State, action: Action): State {
       };
     }
 
-    case ActionType.MEMORY:
-      return state;
     case ActionType.SQUARE_ROOT:
+      return { ...state };
+
+    case ActionType.MEMORY:
       return state;
     case ActionType.PERCENTAGE:
       return state;
