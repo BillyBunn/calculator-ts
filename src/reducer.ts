@@ -72,8 +72,12 @@ export default function reducer(state: State, action: Action): State {
       };
     }
 
-    case ActionType.SQUARE_ROOT:
-      return { ...state };
+    case ActionType.SQUARE_ROOT: {
+      let { display } = state;
+      display =
+        display === "0" ? "0" : Math.sqrt(parseFloat(display)).toString();
+      return { ...state, display };
+    }
 
     case ActionType.MEMORY:
       return state;
