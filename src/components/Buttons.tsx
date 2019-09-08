@@ -78,10 +78,10 @@ const Button = ({ type, value, children }: ButtonProps) => {
 const Buttons = () => {
   return (
     <ButtonGrid className="buttons">
-      <Button type="MEMORY">M+</Button>
-      <Button type="MEMORY">M&minus;</Button>
-      <Button type="MEMORY">MR</Button>
-      <Button type="MEMORY">MC</Button>
+      <Button type="MEMORY_ADD">M+</Button>
+      <Button type="MEMORY_SUBTRACT">M&minus;</Button>
+      <Button type="MEMORY_RECALL">MR</Button>
+      <Button type="MEMORY_CLEAR">MC</Button>
       <Button type="SIGN">+/&minus;</Button>
 
       <Button type="PERCENTAGE">&Delta;%</Button>

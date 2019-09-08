@@ -94,8 +94,39 @@ export default function reducer(state: State, action: Action): State {
       return { ...state, display, firstOperand };
     }
 
-    case ActionType.MEMORY:
-      return state;
+    case ActionType.MEMORY_ADD: {
+      let { firstOperand, memory, display, operator } = state;
+      const inputValue = parseFloat(display);
+
+      // !operator, !firstOperand, !waitingForSecondOperand  -> just add display to memory
+      if (!operator) {
+        memory += parseFloat(display);
+        display = memory.toString();
+      }
+      // operator, firstOperand, and !waitingForSecondOperand
+      // -> perform operation, display result, and add to memory
+      if (firstOperand === null) {
+        firstOperand = inputValue;
+      } else if (operator) {
+        display = performCalculation[operator](firstOperand, inputValue);
+        firstOperand = parseFloat(display);
+        memory += parseFloat(display);
+      }
+      return { ...state, display, memory };
+    }
+
+    case ActionType.MEMORY_RECALL: {
+      let { display, waitingForSecondOperand } = state;
+      display = state.memory.toString();
+      if (state.waitingForSecondOperand) {
+        waitingForSecondOperand = false;
+      }
+      return { ...state, display, waitingForSecondOperand };
+    }
+
+    case ActionType.MEMORY_CLEAR: {
+      return { ...state, memory: 0 };
+    }
     default:
       return state;
   }

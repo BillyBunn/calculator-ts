@@ -3,6 +3,7 @@ export type State = {
   operator: string | null;
   firstOperand: number | null;
   waitingForSecondOperand: boolean;
+  memory: number;
 };
 
 export enum ActionType {
@@ -13,7 +14,10 @@ export enum ActionType {
   SIGN = "SIGN",
   SQUARE_ROOT = "SQUARE_ROOT",
   PERCENTAGE = "PERCENTAGE",
-  MEMORY = "MEMORY"
+  MEMORY_ADD = "MEMORY_ADD",
+  MEMORY_SUBTRACT = "MEMORY_SUBTRACT",
+  MEMORY_RECALL = "MEMORY_RECALL",
+  MEMORY_CLEAR = "MEMORY_CLEAR"
 }
 
 export type Action = {

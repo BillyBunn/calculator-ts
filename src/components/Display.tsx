@@ -29,6 +29,7 @@ const Display = () => {
         <li>operator: {`${state.operator}`}</li>
         <li>firstOperand: {`${state.firstOperand}`}</li>
         <li>waitingForSecondOperand: {`${state.waitingForSecondOperand}`}</li>
+        <li>memory: {`${state.memory}`}</li>
       </ul>
     </StyledDisplay>
   );

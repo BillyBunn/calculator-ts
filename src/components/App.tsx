@@ -15,7 +15,8 @@ export const INITIAL_STATE: State = {
   display: "0",
   firstOperand: null,
   waitingForSecondOperand: false,
-  operator: null
+  operator: null,
+  memory: 0
 };
 
 function ContextProvider(props: React.PropsWithChildren<{}>) {
