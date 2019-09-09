@@ -159,18 +159,19 @@ export default function reducer(state: State, action: Action): State {
       return state;
   }
 }
-const performCalculation = {
-  "/": (firstOperand: number, secondOperand: number): number =>
-    firstOperand / secondOperand,
 
-  "*": (firstOperand: number, secondOperand: number): number =>
-    firstOperand * secondOperand,
+type Operations = {
+  [operator: string]: (firstOperand: number, secondOperand: number) => number;
+};
 
-  "+": (firstOperand: number, secondOperand: number): number =>
-    firstOperand + secondOperand,
+const performCalculation: Operations = {
+  "/": (firstOperand, secondOperand) => firstOperand / secondOperand,
 
-  "-": (firstOperand: number, secondOperand: number): number =>
-    firstOperand - secondOperand,
+  "*": (firstOperand, secondOperand) => firstOperand * secondOperand,
 
-  "=": (firstOperand: number, secondOperand: number): number => secondOperand
+  "+": (firstOperand, secondOperand) => firstOperand + secondOperand,
+
+  "-": (firstOperand, secondOperand) => firstOperand - secondOperand,
+
+  "=": (firstOperand, secondOperand) => secondOperand
 };
