@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { State, Action } from "../types";
-import { Context } from "./App";
+import { Context } from "./Context";
 
 const StyledDisplay = styled.div`
   align-items: center;

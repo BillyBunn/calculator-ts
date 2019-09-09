@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { State, Action, ActionType } from "../types";
-import { Context } from "./App";
+import { Context } from "./Context";
 
 const ButtonGrid = styled.div`
   /* align-content: space-evenly; */
