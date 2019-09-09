@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import reset from "styled-reset";
 import { myTheme } from "../theme";
 import Display from "./Display";
 import Buttons from "./Buttons";
@@ -28,13 +29,7 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
 }
 
 const GlobalStyle = createGlobalStyle`
-  html, body {
-    background: ${props => props.theme.colors.background};
-    height: 100%;
-    margin: 0px;
-    margin:0px;
-    padding: 0px;
-  }
+  ${reset}
   html {
     box-sizing: border-box;
   }
@@ -42,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
   body {
+    background: ${props => props.theme.colors.background};
     color: ${props => props.theme.colors.secondary};
     font-family: sans-serif;
   }
