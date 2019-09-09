@@ -1,6 +1,7 @@
 // my-theme.ts
 import { DefaultTheme } from "styled-components";
-const myTheme: DefaultTheme = {
+// console.log(DefaultTheme);
+const theme: DefaultTheme = {
   borderRadius: "5px",
 
   colors: {
@@ -18,4 +19,4 @@ const myTheme: DefaultTheme = {
   }
 };
 
-export { myTheme };
+export { theme };

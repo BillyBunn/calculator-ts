@@ -11,6 +11,13 @@ declare module "styled-components" {
       secondary: string;
       background: string;
       calculator: string;
+      display: string;
+      displayBorder: string;
+
+      memory: string;
+      operators: string;
+      numbers: string;
+      calculate: string;
     };
 
     test: string;

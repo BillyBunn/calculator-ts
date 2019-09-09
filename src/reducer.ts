@@ -1,5 +1,13 @@
 import { State, Action, ActionType } from "./types";
 
+export const INITIAL_STATE: State = {
+  display: "0",
+  firstOperand: null,
+  waitingForSecondOperand: false,
+  operator: null,
+  memory: 0
+};
+
 export default function reducer(state: State, action: Action): State {
   const { type, payload } = action;
   switch (type) {

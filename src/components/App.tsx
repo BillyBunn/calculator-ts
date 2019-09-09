@@ -1,24 +1,17 @@
 import React from "react";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import reset from "styled-reset";
-import { myTheme } from "../theme";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../theme";
 import Display from "./Display";
 import Buttons from "./Buttons";
+import GlobalStyle from "./styles/GlobalStyle";
+import Calculator from "./styles/Calculator";
 
 import { State, Action } from "../types";
-import reducer from "../reducer";
+import reducer, { INITIAL_STATE } from "../reducer";
 export const Context = React.createContext<[State, React.Dispatch<Action>]>([
   null,
   null
 ]);
-
-export const INITIAL_STATE: State = {
-  display: "0",
-  firstOperand: null,
-  waitingForSecondOperand: false,
-  operator: null,
-  memory: 0
-};
 
 function ContextProvider(props: React.PropsWithChildren<{}>) {
   const value = React.useReducer<React.Reducer<State, Action>>(
@@ -28,52 +21,9 @@ function ContextProvider(props: React.PropsWithChildren<{}>) {
   return <Context.Provider value={value}>{props.children}</Context.Provider>;
 }
 
-const GlobalStyle = createGlobalStyle`
-  ${reset}
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-  body {
-    background: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.secondary};
-    font-family: sans-serif;
-  }
-`;
-
-const Calculator = styled.main`
-  align-items: center;
-  background: ${props => props.theme.colors.calculator};
-  border-radius: 10px 10px 50px 50px;
-  display: flex;
-  flex-flow: column nowrap;
-  margin: 4rem auto 0 auto;
-  padding: 50px;
-  width: 450px;
-
-  > header {
-    align-self: flex-start;
-    color: ${props => props.theme.colors.main};
-    margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .display {
-    margin-bottom: 50px;
-    width: 100%;
-  }
-
-  .buttons {
-    background: ${props => props.theme.colors.calculator};
-  }
-`;
-
 const App = () => {
   return (
-    <ThemeProvider theme={myTheme}>
+    <ThemeProvider theme={theme}>
       <ContextProvider>
         <GlobalStyle />
         <Calculator>
