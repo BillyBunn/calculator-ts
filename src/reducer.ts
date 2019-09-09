@@ -20,6 +20,13 @@ export default function reducer(state: State, action: Action): State {
       };
     }
 
+    case ActionType.CLEAR_ENTRY: {
+      return {
+        ...state,
+        display: "0"
+      };
+    }
+
     case ActionType.NUMBER: {
       const number = payload;
       let { display, waitingForSecondOperand } = state;

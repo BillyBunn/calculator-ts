@@ -32,6 +32,7 @@ const StyledButton = styled.button`
       case "SQUARE_ROOT":
       case "DECIMAL":
       case "CLEAR":
+      case "CLEAR_ENTRY":
         return props.theme.colors.operators;
       case "CALCULATE":
         return props.theme.colors.calculate;
@@ -84,7 +85,7 @@ const Buttons = () => {
       <Button type="MEMORY_CLEAR">MC</Button>
       <Button type="SIGN">+/&minus;</Button>
 
-      <Button type="PERCENTAGE">&Delta;%</Button>
+      <Button type="SQUARE_ROOT">&radic;</Button>
       <Button type="NUMBER" value="7">
         7
       </Button>
@@ -96,7 +97,7 @@ const Buttons = () => {
         &divide;
       </Button>
 
-      <Button type="SQUARE_ROOT">&radic;</Button>
+      <Button type="PERCENTAGE">%</Button>
       <Button type="NUMBER">4</Button>
       <Button type="NUMBER">5</Button>
       <Button type="NUMBER">6</Button>
@@ -104,7 +105,7 @@ const Buttons = () => {
         &times;
       </Button>
 
-      <Button type="PERCENTAGE">%</Button>
+      <Button type="CLEAR_ENTRY">CE</Button>
       <Button type="NUMBER">1</Button>
       <Button type="NUMBER">2</Button>
       <Button type="NUMBER">3</Button>
@@ -112,7 +113,7 @@ const Buttons = () => {
         &minus;
       </Button>
 
-      <Button type="CLEAR">CE</Button>
+      <Button type="CLEAR">C</Button>
       <Button type="NUMBER">0</Button>
       <Button type="DECIMAL">.</Button>
       <Button type="OPERATOR" value="=">

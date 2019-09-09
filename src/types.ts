@@ -8,6 +8,7 @@ export type State = {
 
 export enum ActionType {
   CLEAR = "CLEAR",
+  CLEAR_ENTRY = "CLEAR_ENTRY",
   NUMBER = "NUMBER",
   DECIMAL = "DECIMAL",
   OPERATOR = "OPERATOR",
