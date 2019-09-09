@@ -59,7 +59,10 @@ export default function reducer(state: State, action: Action): State {
       if (firstOperand === null) {
         firstOperand = inputValue;
       } else if (operator) {
-        display = performCalculation[operator](firstOperand, inputValue);
+        display = performCalculation[operator](
+          firstOperand,
+          inputValue
+        ).toString();
         firstOperand = parseFloat(display);
       }
 
@@ -95,24 +98,49 @@ export default function reducer(state: State, action: Action): State {
     }
 
     case ActionType.MEMORY_ADD: {
-      let { firstOperand, memory, display, operator } = state;
-      const inputValue = parseFloat(display);
+      let { display, firstOperand, memory, operator } = state;
 
-      // !operator, !firstOperand, !waitingForSecondOperand  -> just add display to memory
-      if (!operator) {
-        memory += parseFloat(display);
-        display = memory.toString();
+      let inputValue = parseFloat(display);
+
+      if (state.waitingForSecondOperand) {
+        memory += inputValue;
+        return { ...state, memory, operator };
       }
-      // operator, firstOperand, and !waitingForSecondOperand
-      // -> perform operation, display result, and add to memory
-      if (firstOperand === null) {
-        firstOperand = inputValue;
-      } else if (operator) {
-        display = performCalculation[operator](firstOperand, inputValue);
-        firstOperand = parseFloat(display);
-        memory += parseFloat(display);
+
+      if (operator && firstOperand) {
+        inputValue = performCalculation[operator](firstOperand, inputValue);
       }
-      return { ...state, display, memory };
+      memory += inputValue;
+
+      return {
+        ...state,
+        display,
+        memory,
+        waitingForSecondOperand: true
+      };
+    }
+
+    case ActionType.MEMORY_SUBTRACT: {
+      let { display, firstOperand, memory, operator } = state;
+
+      let inputValue = parseFloat(display);
+
+      if (state.waitingForSecondOperand) {
+        memory -= inputValue;
+        return { ...state, memory, operator };
+      }
+
+      if (operator && firstOperand) {
+        inputValue = performCalculation[operator](firstOperand, inputValue);
+      }
+      memory -= inputValue;
+
+      return {
+        ...state,
+        display,
+        memory,
+        waitingForSecondOperand: true
+      };
     }
 
     case ActionType.MEMORY_RECALL: {
@@ -132,18 +160,17 @@ export default function reducer(state: State, action: Action): State {
   }
 }
 const performCalculation = {
-  "/": (firstOperand: number, secondOperand: number): string =>
-    (firstOperand / secondOperand).toString(),
+  "/": (firstOperand: number, secondOperand: number): number =>
+    firstOperand / secondOperand,
 
-  "*": (firstOperand: number, secondOperand: number): string =>
-    (firstOperand * secondOperand).toString(),
+  "*": (firstOperand: number, secondOperand: number): number =>
+    firstOperand * secondOperand,
 
-  "+": (firstOperand: number, secondOperand: number): string =>
-    (firstOperand + secondOperand).toString(),
+  "+": (firstOperand: number, secondOperand: number): number =>
+    firstOperand + secondOperand,
 
-  "-": (firstOperand: number, secondOperand: number): string =>
-    (firstOperand - secondOperand).toString(),
+  "-": (firstOperand: number, secondOperand: number): number =>
+    firstOperand - secondOperand,
 
-  "=": (firstOperand: number, secondOperand: number): string =>
-    secondOperand.toString()
+  "=": (firstOperand: number, secondOperand: number): number => secondOperand
 };
