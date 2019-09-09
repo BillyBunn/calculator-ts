@@ -1,11 +1,4 @@
-import React from "react";
-
 import { State, Action, ActionType } from "./types";
-
-export const Context = React.createContext<[State, React.Dispatch<Action>]>([
-  null,
-  null
-]);
 
 export default function reducer(state: State, action: Action): State {
   const { type, payload } = action;
