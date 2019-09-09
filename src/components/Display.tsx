@@ -10,15 +10,18 @@ const Display = () => {
     <StyledDisplay className="display">
       <div onClick={() => setShowMore(!showMore)}>
         {showMore ? (
-          <ul style={{ fontSize: "50%" }}>
-            <li>display: {`${state.display}`}</li>
-            <li>operator: {`${state.operator}`}</li>
-            <li>firstOperand: {`${state.firstOperand}`}</li>
-            <li>
-              waitingForSecondOperand: {`${state.waitingForSecondOperand}`}
-            </li>
-            <li>memory: {`${state.memory}`}</li>
-          </ul>
+          <>
+            <h3 style={{ fontSize: "60%", textAlign: "center" }}>state</h3>
+            <ul style={{ fontSize: "50%", textAlign: "left" }}>
+              <li>display: {`${state.display}`}</li>
+              <li>operator: {`${state.operator}`}</li>
+              <li>firstOperand: {`${state.firstOperand}`}</li>
+              <li>
+                waitingForSecondOperand: {`${state.waitingForSecondOperand}`}
+              </li>
+              <li>memory: {`${state.memory}`}</li>
+            </ul>
+          </>
         ) : (
           state.display
         )}

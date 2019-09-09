@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledDisplay = styled.div`
   align-items: center;
   background: ${props => props.theme.colors.displayBorder};
+  cursor: pointer;
   display: flex;
   justify-content: center;
   padding: 10px 20px;
