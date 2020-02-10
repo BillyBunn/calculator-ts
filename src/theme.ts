@@ -2,6 +2,8 @@
 import { DefaultTheme } from "styled-components";
 // console.log(DefaultTheme);
 const theme: DefaultTheme = {
+  test: "" /* bug with 'styled-components? */,
+
   borderRadius: "5px",
 
   colors: {

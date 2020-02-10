@@ -1,15 +1,14 @@
 import React from "react";
-import { State, Action } from "../types";
 import { Context } from "./Context";
 import StyledDisplay from "./styles/StyledDisplay";
 
 const Display = () => {
-  const [state] = React.useContext<[State, React.Dispatch<Action>]>(Context);
+  const [state] = React.useContext(Context);
   const [showMore, setShowMore] = React.useState(false);
   return (
     <StyledDisplay className="display">
       <div onClick={() => setShowMore(!showMore)}>
-        {showMore ? (
+        {showMore && state ? (
           <>
             <h3 style={{ fontSize: "60%", textAlign: "center" }}>state</h3>
             <ul style={{ fontSize: "50%", textAlign: "left" }}>
@@ -23,7 +22,7 @@ const Display = () => {
             </ul>
           </>
         ) : (
-          state.display
+          state && state.display
         )}
       </div>
     </StyledDisplay>

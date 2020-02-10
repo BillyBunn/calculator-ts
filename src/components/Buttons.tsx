@@ -1,5 +1,5 @@
 import React from "react";
-import { State, Action, ActionType } from "../types";
+import { ActionType } from "../types";
 import { Context } from "./Context";
 import StyledButton from "./styles/StyledButton";
 import ButtonGrid from "./styles/ButtonGrid";
@@ -11,13 +11,11 @@ type ButtonProps = {
 };
 
 const Button = ({ type, value, children }: ButtonProps) => {
-  const [, dispatch] = React.useContext<[State, React.Dispatch<Action>]>(
-    Context
-  );
+  const [, dispatch] = React.useContext(Context);
   const actionPayload = (value && value.toString()) || children.toString();
 
   const handleClick = () =>
-    dispatch({ type: ActionType[type], payload: actionPayload });
+    dispatch && dispatch({ type: ActionType[type], payload: actionPayload });
 
   const color = children === "=" ? "CALCULATE" : type;
   return (
